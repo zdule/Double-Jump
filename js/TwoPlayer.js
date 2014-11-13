@@ -13,6 +13,7 @@ TwoPlayer.prototype.create = function()
 	this.game.physics.startSystem(Phaser.Physics.ARCADE);
 	this.cursors = this.game.input.keyboard.createCursorKeys();
 	this.game.add.sprite(0, 0, 'sky');
+	this.spacing = 140;
 	this.platforms = this.game.add.group();
 	this.platforms.enableBody = true;
 	var ground = this.platforms.create(0, this.game.world.height - 64, 'ground');
@@ -20,10 +21,10 @@ TwoPlayer.prototype.create = function()
 	ground.body.immovable = true;
 	for (var i = 0; i < 8; i++)
 	{
-		var ledge = this.platforms.create(0, 450- i*85, 'ground');
+		var ledge = this.platforms.create(0, 450- i*this.spacing, 'ground');
 		ledge.x = Math.random()*(this.game.world.width-ledge.width);
 		ledge.body.immovable = true;
-		this.minPad = 450- i*85;
+		this.minPad = 450- i*this.spacing;
 	}
 	this.players = this.game.add.group();
 	this.players.enableBody = true;
@@ -38,8 +39,8 @@ TwoPlayer.prototype.create = function()
 TwoPlayer.prototype.update = function() 
 {
 	this.game.physics.arcade.collide(this.players, this.platforms,null,function (pl,pt){return pl.y+pl.height < pt.y;});
-	this.player1.body.velocity.x *= 0.9;
-	this.player2.body.velocity.x *= 0.9;
+	this.player1.update();
+	this.player2.update();
 
 	if (this.cursors.left.isDown)
 		this.player1.moveLeft();
@@ -83,10 +84,10 @@ TwoPlayer.prototype.moveAll= function(dx)
 	this.minPad += dx;
 	while (this.minPad > 0)
 	{
-		var ledge = this.platforms.create(0, this.minPad-85, 'ground');
+		var ledge = this.platforms.create(0, this.minPad-this.spacing, 'ground');
 		ledge.body.x = Math.random()*(this.game.world.width-ledge.width);
 		ledge.body.immovable = true;
-		this.minPad -= 85;
+		this.minPad -= this.spacing;
 	}
 	this.player1.body.y +=dx;
 	this.player2.body.y += dx;

@@ -7,6 +7,23 @@ Player = function(game,sprite)
 }
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
+Player.prototype.update = function()
+{
+	var time = this.game.time.elapsed;
+	var acceleration = 0.6;
+	if (this.body.velocity.x > 0)
+	{
+		this.body.velocity.x -= acceleration*this.game.time.elapsed;
+		if (this.body.velocity.x < 0)
+			this.body.velocity.x = 0;
+	}
+	if (this.body.velocity.x < 0)
+	{
+		this.body.velocity.x += acceleration*this.game.time.elapsed;
+		if (this.body.velocity.x > 0)
+			this.body.velocity.x = 0;
+	}
+}
 Player.prototype.moveLeft= function()
 {
 	this.body.velocity.x = -350;
@@ -15,6 +32,7 @@ Player.prototype.moveLeft= function()
 Player.prototype.moveRight= function()
 {
 	this.body.velocity.x = 350;
+	//this.body.acceleration.x = -200;
 	this.frame = 1;
 }
 Player.prototype.jump = function()
