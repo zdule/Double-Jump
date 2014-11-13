@@ -35,7 +35,7 @@ SinglePlayer.prototype.create = function()
 }
 SinglePlayer.prototype.update = function() 
 {
-	this.game.physics.arcade.collide(this.players, this.platforms,null,function (pl,pt){return pl.y+pl.height < pt.y;});
+	this.game.physics.arcade.collide(this.players, this.platforms,null,function (pl,pt){return pt.y>pl.y+pl.height;});
 	this.player1.update();
 	if (this.cursors.left.isDown)
 		this.player1.moveLeft();
@@ -66,6 +66,7 @@ SinglePlayer.prototype.moveAll= function(dx)
 	this.score += dx/100;
 	this.scoreText.text = 'Score: ' + Math.round(this.score);
 	this.minPad += dx;
+	this.spacing = 60 + 45*Math.random();
 	while (this.minPad > 0)
 	{
 		var ledge = this.platforms.create(0, this.minPad-this.spacing, 'ground');
