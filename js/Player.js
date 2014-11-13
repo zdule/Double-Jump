@@ -10,7 +10,7 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function()
 {
 	var time = this.game.time.elapsed;
-	var acceleration = 0.6;
+	var acceleration = 0.8;
 	if (this.body.velocity.x > 0)
 	{
 		this.body.velocity.x -= acceleration*this.game.time.elapsed;
