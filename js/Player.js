@@ -36,5 +36,5 @@ Player.prototype.moveRight= function()
 }
 Player.prototype.jump = function()
 {
-	this.body.velocity.y += -650;
+	this.body.velocity.y += -600;
 }

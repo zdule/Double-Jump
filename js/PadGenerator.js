@@ -5,11 +5,10 @@ PadGenerator = function()
 
 PadGenerator.prototype.updateGenerator = function()
 {
-	console.log('hi')
 	if (Math.random() > 0.5)
 		this.currentGenereator = new BasicGenerator(30 + 20*Math.random(),this);
 	else
-		this.currentGenereator = new LongGenerator(5 + 10*Math.random(),this);
+		this.currentGenereator = new LongGenerator(10 + 10*Math.random(),this);
 }
 
 PadGenerator.prototype.top = function() 
@@ -32,9 +31,9 @@ BasicGenerator.prototype.next = function()
 {
 	this.life--;
 	if (Math.random() > 0.95)
-		this.current = 160 + 25*Math.random();
+		this.current = 145 + 15*Math.random();
 	else
-		this.current =  70 + 15*Math.random();
+		this.current =  70 + 10*Math.random();
 	if(this.life <= 0)
 		this.parent.updateGenerator();
 	return this.current;
@@ -53,7 +52,7 @@ LongGenerator = function(x,parent)
 LongGenerator.prototype.next = function()
 {
 	this.life--;
-	this.current =  160 + 25*Math.random();
+	this.current =  145 + 15*Math.random();
 	if(this.life <= 0)
 		this.parent.updateGenerator();
 	return this.current;
