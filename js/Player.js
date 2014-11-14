@@ -32,10 +32,9 @@ Player.prototype.moveLeft= function()
 Player.prototype.moveRight= function()
 {
 	this.body.velocity.x = 350;
-	//this.body.acceleration.x = -200;
 	this.frame = 1;
 }
 Player.prototype.jump = function()
 {
-	this.body.velocity.y += -600;
+	this.body.velocity.y += -650;
 }
