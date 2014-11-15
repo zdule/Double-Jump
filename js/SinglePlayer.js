@@ -51,8 +51,9 @@ SinglePlayer.prototype.update = function()
 	if (p.body.y < 100)
 		this.moveAll(100-p.body.y);
 
-	var speed = Math.sqrt(this.score)/5;
-	if (speed > 2.5) speed = 2.5;
+	var speed = Math.sqrt(this.score)/3;
+	if (speed > 10) speed = 10;
+	this.player1.updateSpeedConst(speed);
 	this.moveAll(speed);
 	var p = this.player1;
 	if (p.body.y >= this.game.world.height-p.height)
